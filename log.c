@@ -9,12 +9,12 @@ int cursor = 0;
 VOID log(const char *msg){
     while(*msg){
         if(*msg == '\n'){         
-            cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH;  // próximo início de linha
+            cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH; 
             msg++;
             continue;
         }
-        video[cursor * 2]     = *msg++;        // caractere
-        video[cursor * 2 + 1] = VGA_GREEN;     // cor
+        video[cursor * 2]     = *msg++;        
+        video[cursor * 2 + 1] = VGA_GREEN;     
         cursor++;
     }
 }
@@ -22,7 +22,7 @@ VOID log(const char *msg){
 VOID log_color(const char *msg, int color){
     while(*msg){
         if(*msg == '\n'){         
-            cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH;  // próximo início de linha
+            cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH;  
             msg++;
             continue;
         }
