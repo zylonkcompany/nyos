@@ -8,12 +8,13 @@ VOID delay(int ms){
     }
 }
 
-unsigned int* kmalloc(unsigned int addr){
-    unsigned int *heap_ptr = (unsigned int*)0x100000;
-    heap_ptr += addr / sizeof(unsigned int);
-    unsigned int* allocated = heap_ptr;
-    log("Alloc Memory Sucess!\n");
-    return allocated;
+unsigned int *heap_ptr = (unsigned int*)0x100000;
+
+unsigned int* kmalloc(unsigned int size){
+    unsigned int* allocated = heap_ptr;               
+    heap_ptr += (size + sizeof(unsigned int) - 1) / sizeof(unsigned int);
+    log("Alloc Memory Success!\n");
+    return allocated;                                
 }
 
 int init(){
