@@ -54,8 +54,8 @@ VOID HalPanicMessage(const char *msg){
 
 void HalSystemDelay(uint32_t ms, uint32_t cpu_freq_mhz){
     uint64_t cycles_to_wait = (uint64_t)cpu_freq_mhz * 1000 * ms;
-    uint64_t start = read_tsc();
-    while(read_tsc() - start < cycles_to_wait){
+    uint64_t start = HalReadTsc();
+    while(HalReadTsc() - start < cycles_to_wait){
         __asm__ volatile("pause");
     }
 }
