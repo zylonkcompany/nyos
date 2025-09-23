@@ -1,19 +1,27 @@
 #include <common.h>
 #include <log.h>
+#include <stddef.h>
 
 int init(){
     HalClearInt();
     HalPrintString("Preparing the system...\n");
-    HalSystemDelay(16);
     HalPrintString("Initializing...\n");
-    void *sys_res = HalMalloc(0x200000);
-    HalSystemDelay(16);
-    HalPrintString("Hello! Welcome to NyOS\n");
+    int *sys_res = HalMalloc(0x200000);
+    if(*sys_res == NULL){
+        HalPanicMessage("Fault in alloc system reserved memory!\n");
+        return ERROR;
+    }
   
     return SUCCESS;
 }
 
 void kmain(){
-    init();
+    if(init() != SUCCESS){
+        HalPanicMessage("System Fault!\n");
+        HalIdle();
+        return ERROR;
+    }
+    HalPrintString("Hello! Welcome to NyOS\n");
+
     HalIdle();
 }
