@@ -6,6 +6,12 @@ static unsigned int *heap_ptr = (unsigned int*)0x100000;
 static unsigned char *video = (unsigned char*) 0xB8000;
 static int cursor = 0;
 
+static inline uint64_t HalReadTsc(){
+    uint32_t lo, hi;
+    __asm__ volatile("rdtsc" : "=a"(lo), "=d"(hi));
+    return ((uint64_t)hi << 32) | lo;
+}
+
 VOID HalPrintString(const char *msg){
     while(*msg){
         if(*msg == '\n'){         
@@ -46,12 +52,13 @@ VOID HalPanicMessage(const char *msg){
 
 }
 
-VOID HalSystemDelay(int ms){
-    for(int i = 0; i < ms * 1000; i++){
+void HalSystemDelay(uint32_t ms, uint32_t cpu_freq_mhz){
+    uint64_t cycles_to_wait = (uint64_t)cpu_freq_mhz * 1000 * ms;
+    uint64_t start = read_tsc();
+    while(read_tsc() - start < cycles_to_wait){
         __asm__ volatile("pause");
     }
 }
-
 unsigned int* HalMalloc(unsigned int size){
     unsigned int* allocated = heap_ptr;               
     heap_ptr += (size + sizeof(unsigned int) - 1) / sizeof(unsigned int);
