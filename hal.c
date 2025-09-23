@@ -32,7 +32,7 @@ VOID HalPrintStringColor(const char *msg, int color){
     }
 }
 
-VOID HalPanic_msg(const char *msg){
+VOID HalPanicMessage(const char *msg){
        while(*msg){
         if(*msg == '\n'){         
             cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH; 
