@@ -1,7 +1,7 @@
-
 #include <common.h>
 #include <log.h>
 
+<<<<<<< Updated upstream
 VOID delay(int ms){
     for(int i = 0; i < ms * 1000; i++){
         __asm__ volatile("pause");
@@ -17,21 +17,28 @@ unsigned int* kmalloc(unsigned int size){
     return allocated;                                
 }
 
+=======
+>>>>>>> Stashed changes
 int init(){
-    __asm__ volatile("cli");
-    log("Preparing the system...\n");
-    delay(16);
-    log("Initializing...\n");
-    kmalloc(0x200000);
-    delay(16);
-    log("Hello! Welcome to NyOS\n");
+    HalClearInt();
+    HalPrintString("Preparing the system...\n");
+    HalSystemDelay(16);
+    HalPrintString("Initializing...\n");
+    void *sys_res = HalMalloc(0x200000);
+    HalSystemDelay(16);
+    HalPrintString("Hello! Welcome to NyOS\n");
   
-    return SUCESS;
+    return SUCCESS;
 }
 
-int kmain(){
+void kmain(){
     init();
+<<<<<<< Updated upstream
     for(;;){
        hlt;
     }
 }
+=======
+    HalIdle();
+}
+>>>>>>> Stashed changes

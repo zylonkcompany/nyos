@@ -7,7 +7,7 @@ LDFLAGS=-m elf_i386 -T linker.ld
 
 all:
 	$(CC) $(CFLAGS) -c kernel.c -o Obj/myos.o
-	$(CC) $(CFLAGS) -c log.c -o Obj/log.o
+	$(CC) $(CFLAGS) -c hal.c -o Obj/hal.o
 	$(AS) $(ASFLAGS) boot.s -o Obj/boot.o
 	$(LD) $(LDFLAGS) Obj/* -o nyoskrnl.bin
 	cp nyoskrnl.bin isodir/boot/

@@ -1,6 +1,7 @@
 #ifndef LOG_H
 #define LOG_H
 
+#define SCREEN_WIDTH 80
 #define VGA_BLACK   0x0
 #define VGA_BLUE    0x1
 #define VGA_GREEN   0x2
@@ -18,7 +19,7 @@
 #define VGA_YELLOW      0xE
 #define VGA_WHITE       0xF
 
-VOID log(const char *msg);
-VOID log_color(const char *msg, int color);
+VOID HalPrintString(const char *msg);
+VOID HalPrintStringColor(const char *msg, int color);
 
 #endif
