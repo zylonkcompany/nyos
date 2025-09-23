@@ -32,6 +32,19 @@ VOID HalPrintStringColor(const char *msg, int color){
     }
 }
 
+VOID HalPanic_msg(const char *msg){
+       while(*msg){
+        if(*msg == '\n'){         
+            cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH; 
+            msg++;
+            continue;
+        }
+        video[cursor * 2]     = *msg++;      
+        video[cursor * 2 + 1] = VGA_RED;       
+        cursor++;
+    }
+
+}
 
 VOID HalSystemDelay(int ms){
     for(int i = 0; i < ms * 1000; i++){
