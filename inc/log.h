@@ -21,5 +21,5 @@
 
 VOID HalPrintString(const char *msg);
 VOID HalPrintStringColor(const char *msg, int color);
-VOID HalPanic_msg(const char *msg);
+VOID HalPanicMessage(const char *msg);
 #endif
