@@ -15,7 +15,7 @@ int init(){
     return SUCCESS;
 }
 
-void kmain(){
+int kmain(){
     if(init() != SUCCESS){
         HalPanicMessage("System Fault!\n");
         HalIdle();
