@@ -4,9 +4,6 @@
 
 #define SYSTEM_RESERVED_MEM 0x200000
 
-#define SYSTEM_RESERVED_MEM 0x200000
-
-
 int init(){
     HalClearInt();
     HalPrintString("Preparing the system...\n");
