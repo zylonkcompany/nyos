@@ -1,6 +1,7 @@
 #include <common.h>
 #include <log.h>
 #include <stdint.h>
+#include <hal.h>
 
 static unsigned int *heap_ptr = (unsigned int*)0x100000;
 static unsigned char *video = (unsigned char*) 0xB8000;

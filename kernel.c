@@ -1,6 +1,7 @@
 #include <common.h>
 #include <log.h>
 #include <stddef.h>
+#include <hal.h>
 
 #define SYSTEM_RESERVED_MEM 0x200000
 
