@@ -19,7 +19,7 @@
 #define VGA_YELLOW      0xE
 #define VGA_WHITE       0xF
 
-VOID HalPrintString(const char *msg);
-VOID HalPrintStringColor(const char *msg, int color);
-VOID HalPanicMessage(const char *msg);
+void HalPrintString(const char *msg);
+void HalPrintStringColor(const char *msg, int color);
+void HalPanicMessage(const char *msg);
 #endif

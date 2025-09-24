@@ -1,6 +1,7 @@
 #include <common.h>
 #include <log.h>
 #include <stdint.h>
+#include <hal.h>
 
 static unsigned int *heap_ptr = (unsigned int*)0x100000;
 static unsigned char *video = (unsigned char*) 0xB8000;
@@ -12,7 +13,7 @@ static inline uint64_t HalReadTsc(){
     return ((uint64_t)hi << 32) | lo;
 }
 
-VOID HalPrintString(const char *msg){
+void HalPrintString(const char *msg){
     while(*msg){
         if(*msg == '\n'){         
             cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH; 
@@ -25,7 +26,7 @@ VOID HalPrintString(const char *msg){
     }
 }
 
-VOID HalPrintStringColor(const char *msg, int color){
+void HalPrintStringColor(const char *msg, int color){
     while(*msg){
         if(*msg == '\n'){         
             cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH; 
@@ -38,7 +39,7 @@ VOID HalPrintStringColor(const char *msg, int color){
     }
 }
 
-VOID HalPanicMessage(const char *msg){
+void HalPanicMessage(const char *msg){
        while(*msg){
         if(*msg == '\n'){         
             cursor = (cursor / SCREEN_WIDTH + 1) * SCREEN_WIDTH; 
@@ -66,15 +67,15 @@ unsigned int* HalMalloc(unsigned int size){
     return allocated;                                
 }
 
-VOID HalClearInt(){
+void HalClearInt(){
     __asm__ volatile("cli");
 }
 
-VOID HalStartInt(){
+void HalStartInt(){
     __asm__ volatile("sti");
 }
 
-VOID HalIdle(){
+void HalIdle(){
     for(;;){
         __asm__ volatile ("hlt");
     }
